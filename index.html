@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Left Recursion</title>
+	<script src="Left Recursion.js"></script>
+	<script src="TopDownParsing.js"></script>
+
+	<script type="text/javascript">
+
+		function startExecution() {
+			grammar = inputGrammar();
+			console.log("Index grammar" + grammar);
+			parsingTable = topDownParsing(grammar);
+
+			console.log("index parsing tab;e " + parsingTable);
+
+			// innerHtml = "";
+			// for (i = 0; i < 5; ++i) {
+			// 	for (j = 0; j < 5; ++j) {
+			// 		innerHtml = innerHtml + parsingTable[i][j] + "  ";
+			// 	}
+			// 	innerHtml += "<br>";
+			// }
+
+			// document.getElementById("output").innerHTML = innerHtml;
+		}
+
+	</script>
+</head>
+
+<body>
+	<p id="output"> 
+	<script type="text/javascript"> startExecution(); </script>
+</body>
+</html>
