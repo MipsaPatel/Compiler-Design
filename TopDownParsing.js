@@ -36,7 +36,7 @@ function topDownParsing(grammar) {
 		
 		for (j = 3; j < temp.length; ++j) {
 			terminal = temp.charAt(j);
-			if (terminal == terminal.toLowerCase() && terminals.includes(temp.charAt(j)) == false) {
+			if (terminal == terminal.toLowerCase() && terminal != "e" && terminals.includes(temp.charAt(j)) == false) {
 				terminals.push(terminal);
 			}
 		}		
@@ -61,8 +61,10 @@ function topDownParsing(grammar) {
 		nonTerminal = production.charAt(0);
 		alpha = production.substring(index);
 
-		var first = prompt("Enter first of " + alpha + " as a string").split();
-		var follow = prompt("Enter follow of " + alpha + " as a string").split();
+		var first = prompt("Enter first of " + alpha + " as a string").split("");
+		console.log(first);
+		var follow = prompt("Enter follow of " + nonTerminal + " as a string").split("");
+		console.log(follow);
 
 		var row, col, flag = 0;
 		row = nonTerminals.indexOf(nonTerminal);
@@ -76,55 +78,66 @@ function topDownParsing(grammar) {
 				continue;
 			}
 				
-			col = terminals.indexOf(p);				
-			parsingTable[row][col] = production.substring(3);
+			col = terminals.indexOf(p);	
+			if (parsingTable[row][col] == 0) {
+				parsingTable[row][col] = production.substring(3);
+			}	
+
+			else {
+				parsingTable[row][col] += ("," + production.substring(3));
+			}		
 		}
 
 		if (flag == 1) {
+			console.log("Follow! " + follow);
 			for(j = 0; j < follow.length; j++) {
 
 				var p = follow[j];
-
+				console.log(p);
 				col = terminals.indexOf(p);				
-				parsingTable[row][col] = production.substring(3);
+				if (parsingTable[row][col] == 0) {
+					parsingTable[row][col] = production.substring(3);
+				}	
+
+				else {
+					parsingTable[row][col] += ("," + production.substring(3));
+				}		
+				console.log(parsingTable[row][col] + " F");
 			}
 		}
 	}
+	outputParsingTable(parsingTable, terminals, nonTerminals);
+	return parsingTable;
+}
 
-	console.log("PT " + parsingTable);
+function outputParsingTable(parsingTable, terminals, nonTerminals) {
 
-	for (i = 0; i < nonTerminals.length; i++) {
-		for (j = 0; j < terminals.length; j++) {
-			// alert(parsingTable[i][j]);
-		}
-	}
-
-	innerHtml = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	innerHtml = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
 	for (i = 0; i < terminals.length; ++i) {
-		innerHtml = innerHtml + terminals[i] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		innerHtml = innerHtml + terminals[i] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	}
-	innerHtml += "<br>";
+	innerHtml += "<br><br>";
 
 	for (i = 0; i < nonTerminals.length; ++i) {
-		innerHtml += nonTerminals[i] + "&nbsp;&nbsp;&nbsp;&nbsp;";
+		innerHtml += nonTerminals[i] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 		for (j = 0; j < terminals.length; ++j) {
 			innerHtml = innerHtml + parsingTable[i][j];
-			console.log(parsingTable[i][j].length);	
 
 			if (parsingTable[i][j] != 0) {
-				for (k = parsingTable[i][j].length; k < 8; ++k) {
+				for (k = parsingTable[i][j].length; k < 11; ++k) {
 					innerHtml += "&nbsp;";
 				}
 			}
 			else {
-				innerHtml += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				innerHtml += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 			}
 		}
-		innerHtml += "<br>";
+		innerHtml += "<br><br>";
 	}
 
 	document.getElementById("output").innerHTML = innerHtml;
 
-	return parsingTable;
+	
+
 }
