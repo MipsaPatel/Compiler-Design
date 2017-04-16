@@ -6,6 +6,15 @@ function inputGrammar() {
 	}
 	console.log(grammar);
 
+	var innerHtml = "&nbsp;&nbsp;&nbsp;&nbsp;";
+	for (var i = 0; i < grammar.length; ++i) {
+		innerHtml += (grammar[i] + "<br>" + "&nbsp;&nbsp;&nbsp;&nbsp;");
+	}
+
+	// document.getElementById("inbox").style.visibility = "hidden";
+	// document.getElementById("inbox").style.visibility = "visible";
+	document.getElementById("inbox").innerHTML = innerHtml;
+
 	return grammar;
 
 	// topDownParsing(grammar);
@@ -137,7 +146,4 @@ function outputParsingTable(parsingTable, terminals, nonTerminals) {
 	}
 
 	document.getElementById("output").innerHTML = innerHtml;
-
-	
-
 }
