@@ -40,16 +40,20 @@ function inputCheck(parsingTable, terminals, nonTerminals, grammar){
 			stack.pop();
 		}
 		else{
-			console.log("here" + " " + nonTerminals.indexOf(stack[stack.length - 1]));
+			console.log("here" + " " + stack[stack.length - 1] + " " + stack);
 			if (nonTerminals.indexOf(stack[stack.length - 1]) >= 0) {
 				console.log("here1");
 				var temp = parsingTable[nonTerminals.indexOf(stack[stack.length - 1])][terminals.indexOf(input1[i])];
 				stack.pop();
-				var temp1 = temp.split('').reverse().join('');
-				temp1 = temp1.split('');
-				for (j = 0; j < temp1.length; j++) {
-					stack.push(temp1[j]);				}
-				i -= 1;
+				var temp1;
+				if (temp != 0 && temp != "9") {
+					temp1 = temp.split('').reverse().join('');
+					temp1 = temp1.split('');
+					for (j = 0; j < temp1.length; j++) {
+						stack.push(temp1[j]);				
+					}
+					i -= 1;
+				}
 			}
 		}
 	}
@@ -92,7 +96,7 @@ function topDownParsing(grammar) {
 		
 		for (j = 3; j < temp.length; ++j) {
 			terminal = temp.charAt(j);
-			if (terminal == terminal.toLowerCase() && terminal != "e" && terminals.includes(temp.charAt(j)) == false) {
+			if (terminal == terminal.toLowerCase() && terminal != "9" && terminals.includes(temp.charAt(j)) == false) {
 				terminals.push(terminal);
 			}
 		}		
@@ -129,7 +133,7 @@ function topDownParsing(grammar) {
 				
 			var p = first[j];
 				
-			if (p == 'e') {
+			if (p == '9') {
 				flag = 1;
 				continue;
 			}
