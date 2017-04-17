@@ -56,11 +56,10 @@ function shiftReduceParser() {
 			
 			stack = stack.substring(0,stack.length-l)+productions[i][0];
 			
-			innerHtml = "&nbsp;&nbsp;&nbsp;&nbsp;";
-			innerHtml += ("STACK"+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+"INPUT");
+			
 			innerHtml += ("</br>" + "&nbsp;&nbsp;&nbsp;&nbsp");
 			innerHtml += (stack+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+str.substring(loc, str.length));
-			//document.write(stack+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+str.substring(loc, str.length));
+			
 			break;
 		}
 		}
