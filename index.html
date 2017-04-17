@@ -5,6 +5,7 @@
 
 	<script src="Left Recursion.js"></script>
 	<script src="TopDownParsing.js"></script>
+	<script src="First_Follow.js"></script>
 	<script src="IndirectLeftRecursion.js"></script>
 
 	<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
@@ -12,8 +13,9 @@
 
 	<link rel="stylesheet" href="style.css">
 	<script type="text/javascript">
-		function firstFunction() {
 
+		function firstFunction() {
+			input();
 		}
 
 		function indirectRecursionFunction() {
@@ -47,12 +49,11 @@
 		<input type="checkbox" id="toggle" />
 		<label class="button" for="toggle"></label>
 		<nav class="nav">
-			<a href="#" onclick="firstFunction()">FIRST</button>
-				<a href="#" onclick="followFunction()">FOLLOW</a>
+			<a href="#" onclick="firstFunction()">FIRST AND FOLLOW</button>
 				<a href="#" onclick="leftRecursionFunction()">LEFT RECURSION</a>
 				<a href="#" onclick="firstfunction()">LEFT FACTORING</a>
 				<a href="#" onclick="indirectRecursionFunction()">INDIRECT LEFT RECURSION</a>
-				<a href="#" onclick="topDownParserFunction()">TOP DOWN PARSER</a>
+				<a href="#" onclick="topDownParserFunction(); return false;">TOP DOWN PARSER</a>
 				<a href="#" onclick="srParserFunction()">SHIFT REDUCE PARSER</a>
 				<a href="#" onclick="slrParserFunction()">BOTTOM UP PARSER</a>
 			</nav>

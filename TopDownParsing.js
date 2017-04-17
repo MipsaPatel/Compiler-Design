@@ -6,7 +6,7 @@ function inputGrammar() {
 	}
 	console.log(grammar);
 
-	var innerHtml = "&nbsp;&nbsp;&nbsp;&nbsp;";
+	var innerHtml = "<br>" + "<br>" + "&nbsp;&nbsp;&nbsp;&nbsp;";
 	for (var i = 0; i < grammar.length; ++i) {
 		innerHtml += (grammar[i] + "<br>" + "&nbsp;&nbsp;&nbsp;&nbsp;");
 	}
@@ -18,6 +18,53 @@ function inputGrammar() {
 	return grammar;
 
 	// topDownParsing(grammar);
+}
+
+function inputCheck(parsingTable, terminals, nonTerminals, grammar){
+	var stack = [];
+	var matched = [];
+	var input1 = prompt("Enter an input string");
+
+	var innerHtml = document.getElementById("inbox").innerHTML;
+	innerHtml += ("<br><br>" + "Input string: " + "&nbsp;&nbsp;" + input1);
+	document.getElementById("inbox").innerHTML = innerHtml;
+
+	stack.push("$");
+	stack.push(grammar[0].charAt(0));
+	
+	for(var i = 0; i < input1.length; i++){
+		console.log(input1[i] + " " + stack[stack.length - 1] + " " + i);
+		if(stack[stack.length - 1] == input1[i]){
+			console.log(input1[i] + " " + stack[stack.length - 1])
+			matched.push(input1[i]);
+			stack.pop();
+		}
+		else{
+			console.log("here" + " " + nonTerminals.indexOf(stack[stack.length - 1]));
+			if (nonTerminals.indexOf(stack[stack.length - 1]) >= 0) {
+				console.log("here1");
+				var temp = parsingTable[nonTerminals.indexOf(stack[stack.length - 1])][terminals.indexOf(input1[i])];
+				stack.pop();
+				var temp1 = temp.split('').reverse().join('');
+				temp1 = temp1.split('');
+				for (j = 0; j < temp1.length; j++) {
+					stack.push(temp1[j]);				}
+				i -= 1;
+			}
+		}
+	}
+
+	var innerHtml = document.getElementById("output").innerHTML;
+	
+	
+	if(stack[stack.length - 1] == '$' && i == input1.length){
+		innerHtml += ("<br><br>" + "Input string MATCHED");
+	}
+	else{
+		innerHtml += ("<br><br>" + "Input string NOT MATCHED");
+	}	
+
+	document.getElementById("output").innerHTML = innerHtml;
 }
 
 function topDownParsing(grammar) {
@@ -116,6 +163,8 @@ function topDownParsing(grammar) {
 		}
 	}
 	outputParsingTable(parsingTable, terminals, nonTerminals);
+	inputCheck(parsingTable, terminals, nonTerminals, grammar);
+	
 	return parsingTable;
 }
 
