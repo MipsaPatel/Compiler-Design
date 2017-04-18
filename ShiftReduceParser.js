@@ -1,6 +1,8 @@
 function shiftReduceParser() {
 	stack="$";
 	loc=0;
+	arr=[];
+
 	no=prompt("Enter number of productions :");
 	alert("Enter the productions");
 	productions=new Array();
@@ -40,7 +42,10 @@ function shiftReduceParser() {
 		{
 			if (temp==productions[i][1])
 			{
+				//innerHtml += ((stack+temp)+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+str.substring(loc, str.length));
+
 				temp = productions[i][0];
+				arr.push(productions[i][1]);
 				break;
 			}
 		}
@@ -49,19 +54,18 @@ function shiftReduceParser() {
 		innerHtml += (stack+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+str.substring(loc, str.length));
 		for (i=0; i < no; i++)
 		{
-		if (stack.endsWith(productions[i][1]))
-		{
-			
-			l=productions[i][1].length;
-			
-			stack = stack.substring(0,stack.length-l)+productions[i][0];
-			
-			
-			innerHtml += ("</br>" + "&nbsp;&nbsp;&nbsp;&nbsp");
-			innerHtml += (stack+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+str.substring(loc, str.length));
-			
-			break;
-		}
+			if (stack.endsWith(productions[i][1]))
+			{			
+				l=productions[i][1].length;
+				stack = stack.substring(0,stack.length-l)+productions[i][0];
+							
+				innerHtml += ("</br>" + "&nbsp;&nbsp;&nbsp;&nbsp");
+				innerHtml += (stack+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+"&nbsp;&nbsp;&nbsp;&nbsp"+str.substring(loc, str.length));
+
+				arr.push(productions[i][1]);
+				
+				break;
+			}
 		}
 	}
 	for (i=0; i < no; i++)
@@ -85,6 +89,10 @@ function shiftReduceParser() {
 		innerHtml += ("</br>" + "&nbsp;&nbsp;&nbsp;&nbsp");
 		innerHtml += ("Rejected.");
 	}
+
+	innerHtml += ("</br><br>HANDLES: ");
+
+	innerHtml += (arr);
 
 	document.getElementById("output").innerHTML = innerHtml;
 }
