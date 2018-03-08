@@ -12,7 +12,8 @@ function inputGrammar1() {
 	removeIndirectLeftRecursion(grammar, nonterminal);
 }
 
-function removeIndirectLeftRecursion(grammar){
+
+function removeIndirectLeftRecursion(grammar) {
 	var gamma, newProduction, newProduction, delta;
 	var newGrammar = [], nonterminal = [];
 
@@ -23,20 +24,15 @@ function removeIndirectLeftRecursion(grammar){
 	}
 
 	for(var i = 0; i < nonterminal.length; i++){
-		//alert("Hi");
 		for(var j = 0; j <= i - 1; j++){
-			//alert("Hi1");
 			for(var k = 0; k < grammar.length; k++){
-				//alert("Hello1");
 				if(nonterminal[i] == grammar[k].charAt(0) && nonterminal[j] == grammar[k].charAt(3) && nonterminal[i] != nonterminal[j]){
 					gamma = grammar[k].substring(4);
-					//alert(gamma);
-					//alert("printed gamma");
+
 					for(var l = 0; l < grammar.length; l++){
 						if(nonterminal[j] == grammar[l].charAt(0)){
 							delta = grammar[l].substring(3);
 							newProduction = nonterminal[i] + "->" + delta + gamma;
-							//alert(newProduction);
 							newGrammar.push(newProduction);
 						}
 					}
@@ -44,7 +40,6 @@ function removeIndirectLeftRecursion(grammar){
 
 						if(nonterminal[i] == grammar[m].charAt(0) && nonterminal[j] != grammar[m].charAt(3)){
 							newProduction = grammar[m];
-							//alert(newProduction);
 							newGrammar.push(newProduction);
 						}
 
@@ -59,6 +54,7 @@ function removeIndirectLeftRecursion(grammar){
 		removeRecursion(newGrammar);
 	}
 }
+
 
 function outputGrammar1(grammar) {
 	for (i = 0; i < grammar.length; ++i) {

@@ -67,7 +67,6 @@ public class TopDownParsing {
 				
 				col = terminals.indexOf(p);				
 				parsingTable[row][col] = production;
-				// System.out.print(parsingTable[i][j] + " ");
 			}
 			
 			if (flag == 1) {
@@ -76,27 +75,11 @@ public class TopDownParsing {
 					char p = follow[j];
 					
 					col = terminals.indexOf(p);				
-					//parsingTable[i][j] = parsingTable[i][j].replace(parsingTable[i][j], production);
 					parsingTable[row][col] = production;
-					// System.out.print(parsingTable[i][j] + " ");
 				}
 			}
-			
-			/*
-			System.out.println(nonTerminals);
-			System.out.println(terminals);
-			
-			
-			for (int k = 0; k < nonTerminals.size(); k++) {
-				for (int l = 0; l < terminals.size(); l++) {
-					System.out.print(parsingTable[k][l] + " ");
-				}
-				System.out.println();
-			}
-			*/
 		}
-		
-		
+			
 		System.out.println(nonTerminals);
 		System.out.println(terminals);
 		
@@ -106,8 +89,5 @@ public class TopDownParsing {
 			}
 			System.out.println();
 		}
-	
-	}
-	
-	
+	}	
 }

@@ -63,11 +63,10 @@ function removeRecursion(grammar) {
 		}
 	}
 	outputGrammar(newGrammar);
-	console.log(newGrammar);
 
 	return newGrammar;
-
 }
+
 
 function outputGrammar(grammar) {
 	var innerHtml = "&nbsp;&nbsp;&nbsp;&nbsp;";
